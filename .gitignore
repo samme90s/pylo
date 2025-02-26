@@ -1,0 +1,6 @@
+# PDM
+.pdm-python
+
+# folders
+**/*venv/
+**/__pychache__/
