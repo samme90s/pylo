@@ -4,6 +4,8 @@
 
 ```toml
 # pyproject.toml
+# Make sure to update the tag, see releases here:
+# https://github.com/samme90s/pylo/tags
 [project]
-dependencies = [{ name = "pylo", git = "https://git@github.com:samme90s/pylo.git", tag = "v0.1.0" }]
+dependencies = ["pylo @ git+https://github.com/samme90s/pylo.git@<tag>"]
 ```
