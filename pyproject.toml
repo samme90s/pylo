@@ -2,9 +2,7 @@
 name = "pylo"
 version = "0.1.0"
 description = "A custom logger module"
-authors = [
-    {name = "Sam", email = "samme.s90@gmail.com"},
-]
+authors = [{name = "Sam", email = "samme.s90@gmail.com"}]
 dependencies = []
 requires-python = ">=3.12"
 readme = "README.md"
