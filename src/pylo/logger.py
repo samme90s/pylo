@@ -13,12 +13,15 @@ BASE_FORMAT = (
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
-# Ensure log directory exists
 def try_create_dir(path: str):
-    try:
-        os.makedirs(os.path.dirname(p=path), exist_ok=True)
-    except Exception as exc:
-        raise SystemExit(f"Failed to create directory: {exc}")
+    # Extract the directory portion of the path.
+    directory = os.path.dirname(path)
+    # Only attempt to create the directory if it isn't an empty string.
+    if directory:
+        try:
+            os.makedirs(directory, exist_ok=True)
+        except Exception as exc:
+            raise SystemExit(f"Failed to create directory: {exc}")
 
 
 # Define a custom formatter with ANSI color codes
