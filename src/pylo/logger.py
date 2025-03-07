@@ -5,6 +5,7 @@
 import logging
 import inspect
 import os
+import copy
 
 # Define a single base format common to all handlers.
 BASE_FORMAT = (
@@ -47,20 +48,23 @@ class ASCIIFormatter(logging.Formatter):
     }
 
     def format(self, record):
+        # Make a shallow copy of the record so that the original is not modified.
+        record_copy = copy.copy(record)
+
         # Retrieve the original message using the record's formatting logic.
-        original_message = record.getMessage()
+        original_message = record_copy.getMessage()
 
         # Truncate the message if it is longer than max_message_length
         if len(original_message) > self.max_message_length:
             # Store the truncated version back into the record.
             # Note: We override msg and args so that record.getMessage() returns the truncated version.
-            record.msg = original_message[: self.max_message_length] + "..."
-            record.args = None
+            record_copy.msg = original_message[: self.max_message_length] + "..."
+            record_copy.args = None
 
         # Retrieve the format corresponding to the log record's level
-        log_fmt = self.FORMATS.get(record.levelno, BASE_FORMAT)
+        log_fmt = self.FORMATS.get(record_copy.levelno, BASE_FORMAT)
         formatter = logging.Formatter(fmt=log_fmt, datefmt=DATE_FORMAT)
-        return formatter.format(record=record)
+        return formatter.format(record=record_copy)
 
 
 def get_logger(name: str = "") -> logging.Logger:
