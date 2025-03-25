@@ -118,4 +118,7 @@ def get_logger(name: str = "") -> logging.Logger:
         )
         logger.addHandler(file_handler)
 
+        # Disable propagation to avoid duplicate logging
+        logger.propagate = False
+
     return logger
